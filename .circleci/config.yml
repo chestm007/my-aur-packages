@@ -57,8 +57,8 @@ install_zxcvbn: &install_zxcvbn
   name: Build and install zxcvbn from aur
   command: |
     cd ~/
-    git clone https://aur.archlinux.org/python-zxcvbn.git
-    cd zxcvbn
+    git clone https://aur.archlinux.org/python2-zxcvbn.git
+    cd python2-zxcvbn
     makepkg -si --noconfirm
 
 # Main
