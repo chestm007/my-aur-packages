@@ -30,9 +30,7 @@ install_cassandra: &install_cassandra
     cd ~/
     git clone https://aur.archlinux.org/cassandra.git
     cd cassandra
-    sudo pacman-key --recv-keys A278B781FE4B2BDA
-    sudo gpg --recv-keys A278B781FE4B2BDA
-    makepkg -si --noconfirm
+    makepkg -si --noconfirm --skippgpcheck
 
 # Main
 version: 2
