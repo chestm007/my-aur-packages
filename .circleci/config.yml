@@ -45,14 +45,6 @@ install_deb2targz: &install_deb2targz
     cd deb2targz
     makepkg -si --noconfirm
 
-install_python2_cassandra_driver: &install_python2_cassandra_driver
-  name: Build and install deb2targz from aur
-  command: |
-    cd ~/
-    git clone https://aur.archlinux.org/python2-cassandra-driver-git.git
-    cd deb2targz
-    makepkg -si --noconfirm
-
 install_zxcvbn: &install_zxcvbn
   name: Build and install zxcvbn from aur
   command: |
@@ -77,20 +69,6 @@ jobs:
           command: |
             sudo pacman-key --recv-keys A5E9288C4FA415FA
             sudo gpg --recv-keys A5E9288C4FA415FA
-      - checkout
-      - run:
-          <<: *gitupdate
-      - run:
-          <<: *pkgbuildtest
-      - run:
-          <<: *buildtest
-  cqlsh:
-    <<: *defaults
-    steps:
-      - run:
-          <<: *updatepackage
-      - run:
-          <<: *install_python2_cassandra_driver
       - checkout
       - run:
           <<: *gitupdate
@@ -143,6 +121,27 @@ jobs:
     steps:
       - run:
           <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+      - persist_to_workspace:
+          root: python2-cassandra-driver-git
+          paths: python2-cassandra-driver-git-*.pkg.tar
+  cqlsh:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - run:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: install python2-cassandra-driver
+          command: sudo pacman -U --noconfirm /tmp/workspace/python2-cassandra-driver-git-*.pkg.tar
       - checkout
       - run:
           <<: *gitupdate
