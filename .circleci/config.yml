@@ -186,7 +186,7 @@ workflows:
       - kairosdb
       - amdgpu-fan
       - python2-cassandra-driver-git
-      - flexget-git
+      # - flexget-git
       - python-cassandra-driver-git
       - cqlsh:
           requires:
