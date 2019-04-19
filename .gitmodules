@@ -1,0 +1,3 @@
+[submodule "linux-asus-aura"]
+	path = linux-asus-aura
+	url = ssh+git://aur@aur.archlinux.org/linux-asus-aura.git
