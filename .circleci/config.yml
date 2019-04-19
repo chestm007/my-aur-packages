@@ -9,7 +9,7 @@ updatepackage: &updatepackage
   name: Update packages
   command: |
     sudo pacman -Syu --noconfirm
-    sudo sed 's/^MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
+    sudo sed -i 's/^#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
 
 gitupdate: &gitupdate
   name: Git repo updates
