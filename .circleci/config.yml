@@ -128,6 +128,9 @@ jobs:
           <<: *pkgbuildtest
       - run:
           <<: *buildtest
+      - run:
+          name: yeah
+          command: ls /home/builder/aur/python2-cassandra-driver-git
       - persist_to_workspace:
           root: python2-cassandra-driver-git
           paths: python2-cassandra-driver-git-*.pkg.tar
