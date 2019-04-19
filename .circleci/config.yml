@@ -58,6 +58,7 @@ install_zxcvbn: &install_zxcvbn
   command: |
     cd ~/
     sudo pacman -S python2 python2-setuptools --noconfirm
+    sudo pacman -S python python-setuptools --noconfirm
     git clone https://aur.archlinux.org/python2-zxcvbn.git
     cd python2-zxcvbn
     makepkg -si --noconfirm
