@@ -31,6 +31,13 @@ install_cassandra: &install_cassandra
     git clone https://aur.archlinux.org/cassandra.git
     cd cassandra
     makepkg -si --noconfirm --skippgpcheck
+install_deb2targz: &install_deb2targz
+  name: Build and install cassandra package from aur
+  command: |
+    cd ~/
+    git clone https://aur.archlinux.org/deb2targz.git
+    cd deb2targz
+    makepkg -si --noconfirm
 
 # Main
 version: 2
