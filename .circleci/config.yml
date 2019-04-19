@@ -25,25 +25,25 @@ buildtest: &buildtest
     cd ~/aur/${CIRCLE_JOB}
     makepkg -sci --noconfirm
 
-# Common Steps
-
-common_steps: &common_steps
-  steps:
-    - run:
-        <<: *updatepackage
-    - checkout
-    - run:
-        <<: *gitupdate
-    - run:
-        <<: *pkgbuildtest
-    - run:
-        <<: *buildtest
 # Main
 version: 2
 jobs:
   linux-asus-aura:
     <<: *defaults
-    <<: *common_steps
+    steps:
+      - run:
+          <<: *updatepackage
+      - run:
+          name: add key to pacman
+          command: |
+            sudo pacman-key --add A5E9288C4FA415FA
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
 
 workflows:
   version: 2
