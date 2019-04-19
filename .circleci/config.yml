@@ -7,23 +7,28 @@ defaults: &defaults
 
 updatepackage: &updatepackage
   name: Update packages
-  command: sudo pacman -Syu --noconfirm
+  command: |
+    sudo pacman -Syu --noconfirm
+    sudo sed 's/^MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf
 
 gitupdate: &gitupdate
   name: Git repo updates
   command: |
     sed -i "s#ssh+git://aur@aur.archlinux.org#https://aur.archlinux.org#" .gitmodules
     git submodule update --init
+
 pkgbuildtest: &pkgbuildtest
   name: Testing PKGBUILD
   command: |
     cd ~/aur/${CIRCLE_JOB}
     namcap PKGBUILD
+
 buildtest: &buildtest
   name: Building package
   command: |
     cd ~/aur/${CIRCLE_JOB}
     makepkg -sci --noconfirm
+
 install_cassandra: &install_cassandra
   name: Build and install cassandra package from aur
   command: |
@@ -31,12 +36,29 @@ install_cassandra: &install_cassandra
     git clone https://aur.archlinux.org/cassandra.git
     cd cassandra
     makepkg -si --noconfirm --skippgpcheck
+
 install_deb2targz: &install_deb2targz
   name: Build and install deb2targz from aur
   command: |
     cd ~/
     git clone https://aur.archlinux.org/deb2targz.git
     cd deb2targz
+    makepkg -si --noconfirm
+
+install_python2_cassandra_driver: &install_python2_cassandra_driver
+  name: Build and install deb2targz from aur
+  command: |
+    cd ~/
+    git clone https://aur.archlinux.org/python2-cassandra-driver-git.git
+    cd deb2targz
+    makepkg -si --noconfirm
+
+install_zxcvbn: &install_zxcvbn
+  name: Build and install zxcvbn from aur
+  command: |
+    cd ~/
+    git clone https://aur.archlinux.org/python-zxcvbn.git
+    cd zxcvbn
     makepkg -si --noconfirm
 
 # Main
@@ -64,6 +86,8 @@ jobs:
     steps:
       - run:
           <<: *updatepackage
+      - run:
+          <<: *install_python2_cassandra_driver
       - checkout
       - run:
           <<: *gitupdate
@@ -140,6 +164,8 @@ jobs:
     steps:
       - run:
           <<: *updatepackage
+      - run:
+          <<: *install_zxcvbn
       - checkout
       - run:
           <<: *gitupdate
@@ -157,6 +183,8 @@ workflows:
       - kairosdb
       - amdgpu-fan
       - cqlsh
+          requires:
+            - python2-cassandra-driver-git
       - flexget-git
       - python2-cassandra-driver-git
       - python-cassandra-driver-git
