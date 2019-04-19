@@ -78,6 +78,8 @@ jobs:
           <<: *updatepackage
       - run:
           <<: *install_cassandra
+      - run:
+          <<: *install_deb2targz
       - checkout
       - run:
           <<: *gitupdate
