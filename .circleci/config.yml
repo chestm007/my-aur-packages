@@ -182,9 +182,9 @@ workflows:
       - linux-thermaltake-rgb
       - kairosdb
       - amdgpu-fan
-      - cqlsh
-          requires:
-            - python2-cassandra-driver-git
-      - flexget-git
       - python2-cassandra-driver-git
+      - flexget-git
       - python-cassandra-driver-git
+      - cqlsh:
+        requires:
+          - python2-cassandra-driver-git
