@@ -45,8 +45,8 @@ install_deb2targz: &install_deb2targz
     cd deb2targz
     makepkg -si --noconfirm
 
-install_zxcvbn: &install_zxcvbn
-  name: Build and install zxcvbn from aur
+install_flexget_aur_deps: &install_flexget_aur_deps
+  name: Build and install flexget deps
   command: |
     cd ~/
     sudo pacman -S python2 python2-setuptools --noconfirm
@@ -55,6 +55,58 @@ install_zxcvbn: &install_zxcvbn
     cd python2-zxcvbn
     makepkg -s package_python-zxcvbn --noconfirm
     sudo pacman -U python-zxcvbn* --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-pynzb.git
+    cd python-pynzb
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-plumbum.git
+    cd python-plumbum
+    makepkg -si --noconfirm
+    cd ~/
+    git clone https://aur.archlinux.org/python-rpyc.git
+    cd python-rpyc
+    makepkg -s
+    sudo pacman -U python-rpyc-*.tar.xz --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-rebulk.git
+    cd python-rebulk
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-babelfish.git
+    cd python-babelfish
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-guessit.git
+    cd python-guessit
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-apscheduler.git
+    cd python-apscheduler
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python2-flask-restplus.git
+    cd python2-flask-restplus
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python2-flask-compress.git
+    cd python2-flask-compress
+    makepkg -si --noconfirm
+
+    cd ~/
+    git clone https://aur.archlinux.org/python-flask-cors.git
+    cd python-flask-cors
+    makepkg -si --noconfirm
+
+
 
 # Main
 version: 2
@@ -166,7 +218,7 @@ jobs:
       - run:
           <<: *updatepackage
       - run:
-          <<: *install_zxcvbn
+          <<: *install_flexget_aur_deps
       - checkout
       - run:
           <<: *gitupdate
@@ -184,7 +236,7 @@ workflows:
       - kairosdb
       - amdgpu-fan
       - python2-cassandra-driver-git
-      # - flexget-git
+      - flexget-git
       - python-cassandra-driver-git
       - cqlsh:
           requires:
