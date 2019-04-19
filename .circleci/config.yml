@@ -32,7 +32,7 @@ install_cassandra: &install_cassandra
     cd cassandra
     makepkg -si --noconfirm --skippgpcheck
 install_deb2targz: &install_deb2targz
-  name: Build and install cassandra package from aur
+  name: Build and install deb2targz from aur
   command: |
     cd ~/
     git clone https://aur.archlinux.org/deb2targz.git
@@ -52,6 +52,30 @@ jobs:
           command: |
             sudo pacman-key --recv-keys A5E9288C4FA415FA
             sudo gpg --recv-keys A5E9288C4FA415FA
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  cqlsh:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  amdgpu-fan:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
       - checkout
       - run:
           <<: *gitupdate
@@ -87,6 +111,42 @@ jobs:
           <<: *pkgbuildtest
       - run:
           <<: *buildtest
+  python2-cassandra-driver-git:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  python-cassandra-driver-git:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  flexget-git:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
 
 workflows:
   version: 2
@@ -95,3 +155,8 @@ workflows:
       - linux-asus-aura
       - linux-thermaltake-rgb
       - kairosdb
+      - amdgpu-fan
+      - cqlsh
+      - flexget-git
+      - python2-cassandra-driver-git
+      - python-cassandra-driver-git
