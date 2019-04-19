@@ -24,6 +24,13 @@ buildtest: &buildtest
   command: |
     cd ~/aur/${CIRCLE_JOB}
     makepkg -sci --noconfirm
+install_cassandra: &install_cassandra
+  name: Build and install cassandra package from aur
+  command: |
+    cd ~/
+    git clone https://aur.archlinux.org/cassandra.git
+    cd cassandra
+    makepkg -si --noconfirm
 
 # Main
 version: 2
@@ -61,6 +68,8 @@ jobs:
     steps:
       - run:
           <<: *updatepackage
+      - run:
+          <<: *install_cassandra
       - checkout
       - run:
           <<: *gitupdate
