@@ -186,5 +186,5 @@ workflows:
       - flexget-git
       - python-cassandra-driver-git
       - cqlsh:
-        requires:
-          - python2-cassandra-driver-git
+          requires:
+            - python2-cassandra-driver-git
