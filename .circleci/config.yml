@@ -36,7 +36,31 @@ jobs:
       - run:
           name: add key to pacman
           command: |
-            sudo pacman-key --recv-keys A5E9288C4FA415FA
+            sudo gpg --recv-keys A5E9288C4FA415FA
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  linux-thermaltake-rgb:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
+      - checkout
+      - run:
+          <<: *gitupdate
+      - run:
+          <<: *pkgbuildtest
+      - run:
+          <<: *buildtest
+  kairosdb:
+    <<: *defaults
+    steps:
+      - run:
+          <<: *updatepackage
       - checkout
       - run:
           <<: *gitupdate
@@ -50,3 +74,5 @@ workflows:
   build:
     jobs:
       - linux-asus-aura
+      - linux-thermaltake-rgb
+      - kairosdb

@@ -1,3 +1,27 @@
 [submodule "linux-asus-aura"]
 	path = linux-asus-aura
 	url = ssh+git://aur@aur.archlinux.org/linux-asus-aura.git
+[submodule "flexget-git"]
+	path = flexget-git
+	url = ssh+git://aur@aur.archlinux.org/flexget-git.git
+[submodule "cqlsh"]
+	path = cqlsh
+	url = ssh+git://aur@aur.archlinux.org/cqlsh.git
+[submodule "amdgpu-fan"]
+	path = amdgpu-fan
+	url = ssh+git://aur@aur.archlinux.org/amdgpu-fan.git
+[submodule "python-cassandra-driver-git"]
+	path = python-cassandra-driver-git
+	url = ssh+git://aur@aur.archlinux.org/python-cassandra-driver-git.git
+[submodule "linux-thermaltake-rgb"]
+	path = linux-thermaltake-rgb
+	url = ssh+git://aur@aur.archlinux.org/linux-thermaltake-rgb.git
+[submodule "deluge-python3-git"]
+	path = deluge-python3-git
+	url = ssh+git://aur@aur.archlinux.org/deluge-python3-git.git
+[submodule "kairosdb"]
+	path = kairosdb
+	url = ssh+git://aur@aur.archlinux.org/kairosdb.git
+[submodule "python2-cassandra-driver-git"]
+	path = python2-cassandra-driver-git
+	url = ssh+git://aur@aur.archlinux.org/python2-cassandra-driver-git.git
