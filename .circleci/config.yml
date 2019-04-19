@@ -36,7 +36,7 @@ jobs:
       - run:
           name: add key to pacman
           command: |
-            sudo pacman-key --add A5E9288C4FA415FA
+            sudo pacman-key --recv-keys A5E9288C4FA415FA
       - checkout
       - run:
           <<: *gitupdate
