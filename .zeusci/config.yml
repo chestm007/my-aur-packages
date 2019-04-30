@@ -110,7 +110,7 @@ install_flexget_aur_deps: &install_flexget_aur_deps
 
 # Main
 version: 2
-stages:
+jobs:
   linux-asus-aura:
     <<: *defaults
     steps:
