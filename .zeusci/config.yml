@@ -110,7 +110,7 @@ install_flexget_aur_deps: &install_flexget_aur_deps
 
 # Main
 version: 2
-jobs:
+stages:
   linux-asus-aura:
     <<: *defaults
     steps:
@@ -230,7 +230,7 @@ jobs:
 workflows:
   version: 2
   build:
-    jobs:
+    stages:
       - linux-asus-aura
       - linux-thermaltake-rgb
       - kairosdb
