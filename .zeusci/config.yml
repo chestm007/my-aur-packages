@@ -20,13 +20,13 @@ gitupdate: &gitupdate
 pkgbuildtest: &pkgbuildtest
   name: Testing PKGBUILD
   command: |
-    cd ~/aur/${CIRCLE_JOB}
+    cd ~/aur/${ZEUS_JOB}
     namcap PKGBUILD
 
 buildtest: &buildtest
   name: Building package
   command: |
-    cd ~/aur/${CIRCLE_JOB}
+    cd ~/aur/${ZEUS_JOB}
     makepkg -sci --noconfirm
 
 install_cassandra: &install_cassandra
